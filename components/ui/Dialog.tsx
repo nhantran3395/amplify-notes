@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction} from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import './Dialog.css';
