@@ -3,9 +3,9 @@ import type { Schema } from "@/amplify/data/resource";
 
 const client = generateClient<Schema>();
 
-export async function saveTodo () {
+export async function saveTodo (content: string) {
     const {errors, data: newTodo} = await client.models.Todo.create({
-        content: window.prompt("title"),
+        content,
         done: false,
         priority: 'medium'
     })
