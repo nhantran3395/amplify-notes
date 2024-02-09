@@ -1,24 +1,27 @@
-import { TextField, Button, Flex } from '@aws-amplify/ui-react';
+import {Dispatch, SetStateAction} from "react";
 
-import Dialog, { type DialogProps } from "@/components/ui";
+import { Dialog, Flex, TextField, Button } from "@radix-ui/themes";
 
-type CreateTodoModalProps = DialogProps;
+type CreateTodoModalProps = {
+    open: boolean;
+    onOpenChange: Dispatch<SetStateAction<boolean>>
+}
 
 function CreateTodoModal({open,onOpenChange} : CreateTodoModalProps) {
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog.Root open={open} onOpenChange={onOpenChange}>
             <Dialog.Content>
                 <Dialog.Title>Create todo</Dialog.Title>
-                <Flex direction={'column'} columnGap={'12'}>
-                    <TextField label={'Title'}/>
-                    <Flex alignSelf={'flex-end'}>
-                        <Dialog.Close asChild>
-                            <Button variation={'primary'}>Create</Button>
+                <Flex direction={'column'} gap={'2'}>
+                    <TextField.Input placeholder={'Title'}/>
+                    <Flex align={'end'}>
+                        <Dialog.Close>
+                            <Button>Create</Button>
                         </Dialog.Close>
                     </Flex>
                 </Flex>
             </Dialog.Content>
-        </Dialog>
+        </Dialog.Root>
     )
 }
 

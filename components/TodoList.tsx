@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Card, Collection } from '@aws-amplify/ui-react'
+import { Card, Flex } from '@radix-ui/themes';
 
 import type { Schema } from "@/amplify/data/resource";
 import { listTodos, subscribeTodos } from "@/services/todos";
@@ -23,16 +23,14 @@ export default function TodoList() {
     }, []);
 
     return (
-        <Collection
-            items={todos}
-            type={'list'}
+        <Flex
             direction={'row'}
-            gap={'24px'}
+            gap={'4'}
             wrap={'wrap'}
         >
-            {(item) => (
-                <Card key={item.id}>{item.content}</Card>
-            )}
-        </Collection>
+            {todos.map((todo) => (
+                <Card key={todo.id}>{todo.content}</Card>
+            ))}
+        </Flex>
     );
 }
