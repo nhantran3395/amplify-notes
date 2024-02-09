@@ -1,47 +1,37 @@
-import { Dispatch, SetStateAction } from 'react';
+import {Dispatch, PropsWithChildren, SetStateAction} from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import './Dialog.css';
+
+import { Button, Flex } from '@aws-amplify/ui-react';
+
+import styles from './Dialog.module.css';
 
 type DialogProps = {
     open: boolean,
     onOpenChange: Dispatch<SetStateAction<boolean>>;
 }
 
-const Modal = ({ open, onOpenChange } : DialogProps) => (
+const CustomDialog = ({ open, onOpenChange, children } : PropsWithChildren<DialogProps>) => (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
         <Dialog.Portal>
-            <Dialog.Overlay className="DialogOverlay" />
-            <Dialog.Content className="DialogContent">
-                <Dialog.Title className="DialogTitle">Edit profile</Dialog.Title>
-                <Dialog.Description className="DialogDescription">
-                    Make changes to your profile here. Click save when you're done.
-                </Dialog.Description>
-                <fieldset className="Fieldset">
-                    <label className="Label" htmlFor="name">
-                        Name
-                    </label>
-                    <input className="Input" id="name" defaultValue="Pedro Duarte" />
-                </fieldset>
-                <fieldset className="Fieldset">
-                    <label className="Label" htmlFor="username">
-                        Username
-                    </label>
-                    <input className="Input" id="username" defaultValue="@peduarte" />
-                </fieldset>
-                <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
-                    <Dialog.Close asChild>
-                        <button className="Button green">Save changes</button>
-                    </Dialog.Close>
-                </div>
+            <Dialog.Overlay className={styles.dialogOverlay} />
+            <Dialog.Content className={styles.dialogContent}>
                 <Dialog.Close asChild>
-                    <button className="IconButton" aria-label="Close">
-                        <Cross2Icon />
-                    </button>
+                    <Flex justifyContent={'flex-end'}>
+                        <Button aria-label="Close">
+                            <Cross2Icon />
+                        </Button>
+                    </Flex>
                 </Dialog.Close>
+                {children}
             </Dialog.Content>
         </Dialog.Portal>
     </Dialog.Root>
 );
 
-export default Modal;
+CustomDialog.Content = Dialog.Content;
+CustomDialog.Title = Dialog.Title;
+CustomDialog.Close = Dialog.Close;
+
+export type { DialogProps };
+export default CustomDialog;
