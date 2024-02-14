@@ -27,6 +27,7 @@ function Home() {
       <CreateTodoModal
           open={open}
           onOpenChange={setOpen}
+          key={window.crypto.randomUUID()}
       />
     </Flex>
   );

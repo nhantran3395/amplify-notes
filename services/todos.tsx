@@ -3,11 +3,12 @@ import type { Schema } from "@/amplify/data/resource";
 
 const client = generateClient<Schema>();
 
-export async function saveTodo (content: string) {
+export async function saveTodo (title: string, description: string, priority: Exclude<Schema["Todo"]["priority"], null>) {
     const {errors, data: newTodo} = await client.models.Todo.create({
-        content,
+        title,
+        description,
         done: false,
-        priority: 'medium'
+        priority: priority? priority : null,
     })
     console.log(errors, newTodo);
 }

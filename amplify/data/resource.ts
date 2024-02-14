@@ -10,9 +10,10 @@ authenticated via an API key, can only "read" records.
 const schema = a.schema({
   Todo: a
     .model({
-      content: a.string(),
-      done: a.boolean(),
-      priority: a.enum(['low','medium','high'])
+        title: a.string(),
+        description: a.string(),
+        done: a.boolean(),
+        priority: a.enum(['low','medium','high'])
     })
     .authorization([a.allow.owner()]),
 });
